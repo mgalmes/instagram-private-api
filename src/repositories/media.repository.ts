@@ -50,9 +50,11 @@ export class MediaRepository extends Repository {
   public async editMedia({
     mediaId,
     captionText,
+    usertags,
   }: {
     mediaId: string;
     captionText: string;
+    usertags: string;
   }): Promise<MediaEditResponseRootObject> {
     const { body } = await this.client.request.send({
       url: `/api/v1/media/${mediaId}/edit_media/`,
@@ -64,6 +66,7 @@ export class MediaRepository extends Repository {
         _uid: this.client.state.cookieUserId,
         _uuid: this.client.state.uuid,
         caption_text: captionText,
+        usertags: usertags,
       }),
     });
     return body;
